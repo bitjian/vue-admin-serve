@@ -1,0 +1,11 @@
+# -------------------------dir-------------------------
+.DS_Store
+.husky
+node_modules
+logs
+cabFile
+patches
+# -------------------------file-------------------------
+package.json
+package-lock.json
+.prettierrc.js

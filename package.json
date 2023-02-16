@@ -1,0 +1,50 @@
+{
+  "name": "vue-admin-serve",
+  "version": "1.0.0",
+  "description": "express serve cli + babel",
+  "main": "index.js",
+  "scripts": {
+    "start": "babel-node ./index.js",
+    "dev": "npm run dev:server",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev:server": "cross-env DEBUG=app:* nodemon --inspect --watch src/ --ignore src/assets --exec babel-node src/server.js",
+    "check": "prettier --check .",
+    "lint": "eslint . --fix",
+    "format": "prettier --write .",
+    "prepare": "husky install",
+    "lint-staged": "lint-staged --allow-empty",
+    "lint-staged:js": "eslint --ext .js,.jsx,.ts,.tsx "
+  },
+  "lint-staged": {
+    "**/*.{js,jsx,ts,tsx}": "npm run lint-staged:js",
+    "**/*.{js,jsx,tsx,ts,less,md,json}": [
+      "prettier --write"
+    ]
+  },
+  "devDependencies": {
+    "@babel/core": "^7.20.12",
+    "@tencent/eslint-config-tencent": "^1.0.4",
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "cross-env": "^7.0.3",
+    "eslint": "^8.34.0",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "husky": "^8.0.0",
+    "lint-staged": "^13.1.2",
+    "nodemon": "^2.0.20",
+    "prettier": "^2.8.4"
+  },
+  "dependencies": {
+    "axios": "^0.19.2",
+    "body-parser": "^1.18.2",
+    "compression": "^1.7.1",
+    "cookie-parser": "^1.4.3",
+    "cors": "^2.8.4",
+    "debug": "^3.1.0",
+    "express": "^4.16.3"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

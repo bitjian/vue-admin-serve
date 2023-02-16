@@ -118,11 +118,58 @@ vim package.json
   ******
 ```
 
-## 4.运行
+## 4.mysql 连接,redis
+
+> npm i knex mysql
+> common/db.js
+
+```javascript
+import { DB_CONFIG } from '../common/db';
+
+const knex = require('knex')({
+  client: 'mysql',
+  connection: DB_CONFIG,
+});
+
+async function query(...arg) {
+  let ret;
+  try {
+    ret = await knex.raw(...arg);
+  } catch (err) {
+    console.log(`执行sql脚本失败：${err}`);
+    throw new Error(`执行sql脚本失败：${err}`);
+  }
+  return ret[0];
+}
+
+const select = query;
+export { knex, select };
+```
+
+> npm i ioredis  
+> redis.js
+
+```javascript
+import { REDIS_CONFIG } from '../config/index';
+import Redis from 'ioredis';
+
+const getRedis = (cnf) => {
+  if (cnf.connection.cluster) {
+    return new Redis.Cluster(cnf.options.nodes, cnf.options.clusterOptions);
+  }
+  return new Redis(cnf.connection.options);
+};
+
+const redis = getRedis(REDIS_CONFIG);
+
+export default redis;
+```
+
+## 5.运行
 
 ### 1.本地启动
 
-> npm i
+> npm i  
 > npm run dev
 
 ### 2.本地构建

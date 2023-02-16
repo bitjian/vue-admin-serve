@@ -23,13 +23,13 @@ vim .babelrc
 
 ## 2.加入 husky
 
-> > > 1.安装依赖包
+> 1.安装依赖包
 
 ```javascript
   npm i eslint prettier lint-staged eslint-plugin-prettier @tencent/eslint-config-tencent -D
 ```
 
-> > > 2.配置.eslintrc.js 和 .prettierrc.js
+> 2.配置.eslintrc.js 和 .prettierrc.js
 
 ```javascript
 touch .eslintrc.js;
@@ -74,7 +74,7 @@ vim .eslintignore
   .prettierrc.js
 ```
 
-> > > 3.加入 husky
+> 3.加入 husky
 
 ```javascript
   npx husky-init && npm install
@@ -98,3 +98,37 @@ vim .eslintignore
     ****
   }
 ```
+
+## 3.打包
+
+> 1. 安装依赖
+>    npm i cross-env rimraf npm-run-all -D 2.配置打包脚本
+
+```javascript
+vim package.json
+  ******
+  "scripts": {
+    "build": "npm-run-all clean build:server",
+    "release": "npm-run-all clean build release:deps release:package",
+    "build:server": "cross-env BABEL_ENV=production babel ./ -d ./dist --copy-files --ignore './node_modules'",
+    "clean": "rimraf ./dist release",
+    "release:deps": "cross-env-shell \"cd dist && npm install --production\"",
+    "release:package": "cross-env-shell \"cd dist && zip -q -r $npm_package_name.zip * $npm_package_name\""
+  }
+  ******
+```
+
+## 4.运行
+
+### 1.本地启动
+
+> npm i
+> npm run dev
+
+### 2.本地构建
+
+> npm run build
+
+### 3.本地打包
+
+> npm run release

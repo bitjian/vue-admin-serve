@@ -24,6 +24,9 @@ app.use(
   }),
 );
 app.use(cookieParser());
+app.get('/', (_req, res) => {
+  res.send('hi');
+});
 app.use('/api', api());
 
 // catch 404 and forward to error handler

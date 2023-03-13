@@ -1,4 +1,5 @@
-import { DB_CONFIG } from '../common/db';
+import config from '../config/index';
+const { DB_CONFIG } = config;
 
 const knex = require('knex')({
   client: 'mysql',

@@ -72,8 +72,8 @@ function onListening() {
 }
 
 process.on('uncaughtException', (err) => {
-  logger.exception.error('uncaughtException', err);
+  console.error('uncaughtException', err);
 });
 process.on('unhandledRejection', (reason, p) => {
-  logger.exception.error('unhandledRejection', reason, p);
+  console.error('unhandledRejection', reason, p);
 });

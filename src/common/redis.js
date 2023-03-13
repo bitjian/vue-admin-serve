@@ -1,5 +1,6 @@
-import { REDIS_CONFIG } from '../config/index';
+import config from '../config/index';
 import Redis from 'ioredis';
+const { REDIS_CONFIG } = config;
 
 const getRedis = (cnf) => {
   if (cnf.connection.cluster) {
